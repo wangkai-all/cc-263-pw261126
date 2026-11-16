@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SandboxLab · 沙箱与删除影响</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="mark">SL</span>
+    <div>
+      <h1>SandboxLab</h1>
+      <p>共享基底 + 本地覆盖层 · 克隆 / 刷新 / 销毁 / 删除</p>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <button id="btn-simulate" class="btn ghost">模拟上游变更</button>
+    <button id="btn-recover" class="btn ghost">恢复未完成删除</button>
+    <a class="btn ghost" href="/api/state" target="_blank" rel="noreferrer">API 状态</a>
+  </div>
+</header>
+
+<main class="layout">
+  <aside class="panel sidebar">
+    <section>
+      <div class="panel-head">
+        <h2>沙箱</h2>
+        <span id="sandbox-count" class="pill">0</span>
+      </div>
+      <form id="clone-form" class="inline-form">
+        <input id="clone-label" maxlength="40" placeholder="新沙箱名称，例如 定价实验" required>
+        <button class="btn primary" type="submit">克隆</button>
+      </form>
+      <ul id="sandbox-list" class="sandbox-list"></ul>
+    </section>
+
+    <section>
+      <div class="panel-head">
+        <h2>上游</h2>
+        <span id="upstream-rev" class="pill">rev 0</span>
+      </div>
+      <div id="upstream-summary" class="kv"></div>
+      <button id="btn-erase" class="btn danger-ghost" type="button">按记录执行删除…</button>
+    </section>
+
+    <section>
+      <div class="panel-head"><h2>策略说明</h2></div>
+      <p class="muted small" id="policy-note"></p>
+      <button id="btn-policy" class="btn ghost small" type="button" style="margin-top:8px">查看取舍说明</button>
+    </section>
+  </aside>
+
+  <section id="workspace" class="workspace">
+    <div class="empty-state">
+      <h2>选择一个沙箱</h2>
+      <p>沙箱只持有共享数据块的引用与自己改动过的行，不会复制整份上游数据。</p>
+    </div>
+  </section>
+</main>
+
+<footer class="statusbar">
+  <span id="status-text">就绪</span>
+  <span id="status-detail" class="muted"></span>
+</footer>
+
+<div id="modal-root"></div>
+<div id="toast-root" class="toast-root"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
